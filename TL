@@ -1,0 +1,46 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local magnetOn = false
+
+-- GUI
+local gui = Instance.new("ScreenGui")
+gui.Parent = LocalPlayer.PlayerGui
+
+local button = Instance.new("TextButton")
+button.Parent = gui
+button.Size = UDim2.new(0,200,0,50)
+button.Position = UDim2.new(0,20,0,200)
+button.BackgroundColor3 = Color3.fromRGB(60,60,60)
+button.TextColor3 = Color3.new(1,1,1)
+button.Text = "Boss Magnet: OFF"
+
+button.MouseButton1Click:Connect(function()
+    magnetOn = not magnetOn
+    button.Text = magnetOn and "Boss Magnet: ON" or "Boss Magnet: OFF"
+    button.BackgroundColor3 = magnetOn and Color3.fromRGB(0,170,0) or Color3.fromRGB(60,60,60)
+end)
+
+-- Strong magnet loop
+task.spawn(function()
+    while true do
+        task.wait(0.02)
+        if magnetOn then
+            local char = LocalPlayer.Character
+            local hrp = char and char:FindFirstChild("HumanoidRootPart")
+
+            local boss = workspace:FindFirstChild("BossRing")
+                and workspace.BossRing:FindFirstChild("Boss")
+
+            local bossHRP = boss and boss:FindFirstChild("HumanoidRootPart")
+
+            if hrp and bossHRP then
+                local targetPos = hrp.Position + Vector3.new(0,8,0)
+                local direction = (targetPos - bossHRP.Position)
+
+                -- VERY STRONG MAGNET
+                bossHRP.AssemblyLinearVelocity = direction * 50
+            end
+        end
+    end
+end)
