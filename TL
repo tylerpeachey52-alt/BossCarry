@@ -24,7 +24,7 @@ end)
 -- Strong magnet loop
 task.spawn(function()
     while true do
-        task.wait(0.02)
+        task.wait(0)
         if magnetOn then
             local char = LocalPlayer.Character
             local hrp = char and char:FindFirstChild("HumanoidRootPart")
