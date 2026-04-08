@@ -35,11 +35,11 @@ task.spawn(function()
             local bossHRP = boss and boss:FindFirstChild("HumanoidRootPart")
 
             if hrp and bossHRP then
-                local targetPos = hrp.Position + Vector3.new(0,2,0)
+                local targetPos = hrp.Position + Vector3.new(0,5,0)
                 local direction = (targetPos - bossHRP.Position)
 
                 -- VERY STRONG MAGNET
-                bossHRP.AssemblyLinearVelocity = direction * 75
+                bossHRP.AssemblyLinearVelocity = direction * 40
             end
         end
     end
