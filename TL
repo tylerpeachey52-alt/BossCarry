@@ -39,7 +39,7 @@ task.spawn(function()
                 local direction = (targetPos - bossHRP.Position)
 
                 -- VERY STRONG MAGNET
-                bossHRP.AssemblyLinearVelocity = direction * 40
+                bossHRP.AssemblyLinearVelocity = direction * 80
             end
         end
     end
